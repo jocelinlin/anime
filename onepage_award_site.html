@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>動畫得獎作品</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: 'Arial', 'Microsoft JhengHei', sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* 導航欄樣式 */
+    .header-container {
+      background: #000;
+      border-bottom: 1px solid #222;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 50px;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 400;
+      transition: color 0.3s;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-menu a:hover {
+      color: #888;
+    }
+
+    /* 奧斯卡介紹區域 */
+    .oscar-intro {
+      background: #0a0a0a;
+      padding: 50px 60px;
+      border-bottom: 1px solid #222;
+    }
+
+    .intro-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .intro-content h2 {
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .intro-content p {
+      font-size: 16px;
+      color: #aaa;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    /* 主視覺區域 */
+    .hero-section {
+      background: #000;
+      padding: 100px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .hero-content h1 {
+      font-size: 72px;
+      color: #fff;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 30px;
+      letter-spacing: -1px;
+    }
+
+    .hero-content p {
+      font-size: 20px;
+      color: #aaa;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    /* 分頁標籤 */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      padding: 20px;
+    }
+    
+    .tab {
+      padding: 10px 20px;
+      background: #222;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .tab.active {
+      background: #e50914;
+    }
+
+    /* 內容區域 */
+    .content-section { 
+      display: none; 
+      padding: 40px;
+    }
+    
+    .content-section.active { 
+      display: block; 
+    }
+
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .hero-section-item {
+      padding: 20px;
+    }
+    
+    .hero-section-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .hero-section-item h2 {
+      margin-top: 15px;
+      font-size: 24px;
+    }
+
+    .hero-section-item h3 {
+      margin-top: 10px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .hero-section-item p {
+      font-size: 14px;
+      color: #aaa;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    /* 頁尾樣式 */
+    .footer {
+      background: #0a0a0a;
+      padding: 60px 60px 30px;
+      margin-top: 60px;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 50px;
+    }
+
+    .footer-section h3 {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .footer-section p {
+      color: #888;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-about {
+      max-width: 300px;
+    }
+
+    .footer-about p {
+      margin-bottom: 15px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+      margin-top: 3px;
+      fill: #888;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: #1a1a1a;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #fff;
+    }
+
+    .social-links a:hover svg {
+      fill: #000;
+    }
+
+    .social-links svg {
+      width: 18px;
+      height: 18px;
+      fill: #888;
+      transition: fill 0.3s;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-bottom {
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .intro-content {
+        padding: 0 30px;
+      }
+
+      .intro-content h2 {
+        font-size: 22px;
+      }
+
+      .intro-content p {
+        font-size: 14px;
+      }
+
+      nav {
+        padding: 20px 30px;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .nav-menu {
+        gap: 30px;
+      }
+
+      .hero-section {
+        padding: 60px 30px;
+      }
+
+      .hero-content h1 {
+        font-size: 42px;
+      }
+
+      .hero-content p {
+        font-size: 16px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        padding: 40px 30px 20px;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-about {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 頁首導航 -->
+  <header class="header-container">
+    <nav>
+      <a href="#" class="logo">
+        <img src="奧斯卡logo拷貝.png" alt="網站Logo">
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#home">首頁</a></li>
+        <li><a href="#about">關於我們</a></li>
+        <li><a href="#awards">得獎作品</a></li>
+        <li><a href="#contact">聯絡資訊</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 主視覺區域 -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>2023-2025得獎作品<br>奧斯卡最佳動畫獎</h1>
+      <p>Academy Award for Best Animated Feature Film是於2001年設立的奧斯卡金像獎獎項。</p>
+    </div>
+  </section>
+
+  <!-- 奧斯卡介紹區域 -->
+  <section class="oscar-intro">
+    <div class="intro-content">
+      <h2>關於奧斯卡最佳動畫獎</h2>
+      <p>奧斯卡最佳動畫長片獎(Academy Award for Best Animated Feature)是美國電影藝術與科學學院於2001年設立的獎項,旨在表彰年度最優秀的動畫長片作品。該獎項的設立標誌著動畫電影在電影藝術中獲得了應有的認可與地位。自設立以來,這個獎項見證了動畫技術的革新與藝術表現的多元發展,從傳統手繪動畫到3D電腦動畫,從定格動畫到各種實驗性技法,每一部得獎作品都代表著當代動畫藝術的最高水準。</p>
+    </div>
+  </section>
+
+  <!-- 分頁標籤 -->
+  <div class="tabs">
+    <div class="tab active" data-target="long">長片得獎</div>
+    <div class="tab" data-target="short">短片得獎</div>
+    <div class="tab" data-target="nominate">入圍作品</div>
+  </div>
+
+  <!-- 長片得獎 -->
+  <section class="content-section active" id="long">
+    <h2 class="section-title">長片得獎</h2>
+    <div class="hero">
+      <div class="hero-section-item">
+        <h2>2023年</h2>
+        <img src="2023長片 吉勒摩·戴托羅之皮諾丘.jpg" alt="長片1" />
+        <h3>吉爾莫·德爾·托羅之皮諾丘</h3>
+        <p><strong>Guillermo del Toro's Pinocchio</strong></p>
+        <p>這是一部由吉爾莫·德爾·托羅執導的定格動畫電影,講述了神奇的魔法讓小木偶活了過來,並在冒險中追尋自我歸屬的故事。</p>
+      </div>
+      <div class="hero-section-item">
+        <h2>2024年</h2>
+        <img src="2024長片 蒼鷺與少年.jpg" alt="長片2" />
+        <h3>蒼鷺與少年</h3>
+        <p><strong>The Boy and the Heron</strong></p>
+        <p>故事以二戰為背景,講述了少年真人因母親過世,跟隨父親和繼母夏子搬到鄉下大宅後,在會說話的蒼鷺引領下,進入一個生者與死者共存的奇幻世界,展開尋找母親和夏子的冒險。</p>
+      </div>
+      <div class="hero-section-item">
+        <h2>2025年</h2>
+        <img src="2025長片《喵的奇幻漂流》.jpg" alt="長片3" />
+        <h3>喵的奇幻漂流</h3>
+        <p><strong>Flow</strong></p>
+        <p>這是一部由吉爾莫·德爾·托羅執導的定格動畫電影,講述了神奇的魔法讓小木偶活了過來,並在冒險中追尋自我歸屬的故事。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 短片得獎 -->
+  <section class="content-section" id="short">
+    <h2 class="section-title">短片得獎</h2>
+    <div class="hero">
+      <div class="hero-section-item">
+        <h2>2023年</h2>
+        <img src="2023短片 男孩、鼴鼠、狐狸與馬.jpg" alt="短片1" />
+        <h3>男孩、鼴鼠、狐狸與馬</h3>
+        <p><strong>The Boy, the Mole, the Fox and the Horse</strong></p>
+        <p>故事講述四個朋友在旅途中相互陪伴、互相理解,共同面對生活中的挑戰,探討愛、友誼和接納自我的主題。</p>
+      </div>
+      <div class="hero-section-item">
+        <h2>2024年</h2>
+        <img src="2024短片 戰爭結束了！受列儂和洋子音樂的啟發.jpg" alt="短片2" />
+        <h3>戰爭結束了!<br>受列儂和洋子音樂的啟發</h3>
+        <p><strong>War Is Over! Inspired by the Music of John and Yoko</strong></p>
+        <p>故事背景設定在第一次世界大戰的平行時空,講述了兩名敵方士兵在戰壕中下棋的故事。</p>
+      </div>
+      <div class="hero-section-item">
+        <h2>2025年</h2>
+        <img src="2025短片《柏樹之影》.jpg" alt="短片3" />
+        <h3>柏樹之影</h3>
+        <p><strong>In the Shadow of the Cypress</strong></p>
+        <p>講述一位患有創傷後壓力症候群的船長父親與他女兒之間的故事,全片無對白。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 入圍作品 -->
+  <section class="content-section" id="nominate">
+    <h2 class="section-title">入圍作品</h2>
+        <h1>2023年入圍作品</h1>
+         <img src="迷你寶貝網紅秀.jpg"width="175"height="265" alt="入圍1" />
+        <img src="鞋貓劍客2.jpg"width="175"height="265" alt="入圍1" />
+        <img src="海獸獵人.jpg"width="175"height="265" alt="入圍1" />
+        <img src="青春養成記.jpg"width="175"height="265" alt="入圍1" />
+        <img src="飛翔的水手.jpg"width="175"height="265" alt="入圍1" />
+        <img src="冰商.jpg"width="175"height="265" alt="入圍1" />
+        <img src="我的迪克之年.jpg"width="175"height="265" alt="入圍1" />
+        <img src="一隻鴕鳥告訴我世界是假的，我想我信了.jpg"width="175"height="265" alt="入圍1" />
+        <p><strong>長片</strong></p>
+        <p>迷你寶貝網紅秀 鞋貓劍客2 海獸獵人 青春養成記</p>
+        <p><strong>短片</strong></p>
+        <p>飛翔的水手 冰商 我的迪克之年 一隻鴕鳥告訴我世界是假的，我想我信了</p>
+         <hr>
+      </div>
+      <h1>2024年入圍作品</h1>
+        <img src="元素.jpg"width="175"height="265" alt="入圍1" />
+        <img src="怪物少女末提娜.png"width="175"height="265"alt="入圍1" />
+        <img src="再見機器人.jpg"width="175"height="265"alt="入圍1" />
+        <img src="蜘蛛人 穿越新宇宙.jpg"width="175"height="265" alt="入圍1" />
+        <img src="給豬的一封信.jpg"width="175"height="265" alt="入圍1" />
+        <img src="九十五種感官.jpg"width="175"height="265" alt="入圍1" />
+        <img src="我們的製服.jpg"width="175"height="265" alt="入圍1" />
+        <img src="厚皮動物.jpg"width="175"height="265" alt="入圍1" />
+       <p><strong>長片</strong></p>
+        <p>元素 怪物少女末提娜 再見機器人 蜘蛛人 穿越新宇宙</p>
+        <p><strong>短片</strong></p>
+        <p>給豬的一封信 九十五種感官 我們的製服 厚皮動物</p>
+         <hr>
+      </div>
+      <h1>2025年入圍作品</h1>
+        <img src="腦筋急轉彎2.jpg"width="175"height="265" alt="入圍1" />
+        <img src="蝸牛少女回憶錄.jpg"width="175"height="265" alt="入圍1" />
+        <img src="酷狗寶貝之復仇企鵝.jpg"width="175"height="265" alt="入圍1" />
+        <img src="荒野機器人.jpg"width="175"height="265" alt="入圍1" />
+        <img src="美麗男人.jpg"width="175"height="265" alt="入圍1" />
+        <img src="魔法糖語.jpg"width="175"height="265" alt="入圍1" />
+        <img src="漫步奇境.jpg"width="175"height="265"alt="入圍1" />
+        <img src="Yuck!.jpg"width="175"height="265"alt="入圍1" />
+        <p><strong>長片</strong></p>
+        <p>腦筋急轉彎2 蝸牛少女回憶錄 酷狗寶貝之復仇企鵝 荒野機器人</p>
+        <p><strong>短片</strong></p>
+        <p>美麗男人 魔法糖語 漫步奇境 Yuck!</p>
+    </div>
+  </section>
+
+  <!-- 頁尾 -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <!-- 關於我們 -->
+        <div class="footer-section footer-about">
+          <h3>關於我們</h3>
+          <p>我們致力於收集和展示奧斯卡最佳動畫獎的歷年得獎作品,讓更多人了解優秀的動畫藝術。</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 聯絡資訊 -->
+        <div class="footer-section">
+          <h3>聯絡我們</h3>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            <p>台中市西屯區台灣大道三段99號</p>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <p>+886 4 1234 5678</p>
+          </div>
+          <div class="contact-item">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <p>info@oscar-animation.com</p>
+          </div>
+        </div>
+
+        <!-- 快速連結 -->
+        <div class="footer-section">
+          <h3>快速連結</h3>
+          <div class="footer-links">
+            <p>關於我們</p>
+            <p>得獎作品</p>
+            <p>入圍名單</p>
+            <p>最新消息</p>
+            <p>聯絡我們</p>
+          </div>
+        </div>
+
+        <!-- 相關資訊 -->
+        <div class="footer-section">
+          <h3>相關資訊</h3>
+          <div class="footer-links">
+            <p>奧斯卡金像獎官網</p>
+            <p>動畫歷史</p>
+            <p>評選標準</p>
+            <p>常見問題</p>
+            <p>隱私權政策</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 版權資訊 -->
+      <div class="footer-bottom">
+        <p>&copy; 2025 動畫獎項網站. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const sections = document.querySelectorAll('.content-section');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const target = tab.getAttribute('data-target');
+        sections.forEach(sec => {
+          sec.classList.remove('active');
+          if (sec.id === target) sec.classList.add('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
